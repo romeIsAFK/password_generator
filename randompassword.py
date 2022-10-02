@@ -16,11 +16,11 @@ def print_menu():
 
 # Program says hello!
 print('\nHello! Welcome to the Password Generator.\n')
-while (True):
-    option = 0
-    while 1 > option or 3 < option:
-        try:
-            print_menu()
-            option = int(input('\nEnter your choice:'))
-        except:
-            print('\nWrong input, try again.\n')
+
+option = 0
+while not int(option) in range(1,4):
+    try:
+        print_menu()
+        option = int(input('\nEnter your choice:'))
+    except:
+        print('\nWrong input, try again.\n')
