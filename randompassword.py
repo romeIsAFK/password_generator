@@ -40,6 +40,4 @@ def main():
         except:
                 if choice > 3:
                     print("\nInvalid input. Please enter an integer from 1 to 3\n")
-
-
-main()main()
+main()
