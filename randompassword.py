@@ -63,12 +63,11 @@ def main():
 
             choice = int(input('\nEnter your choice:'))
 
-            if choice > 1 and choice < 4:
+            if choice == 1 or choice == 2:
                 break
-            elif choice == 3:
+            if choice == 3:
+                break
                 exit()
-            # else:s
-            #     print('\nInvalid input. Please enter an integer from 1 to 3.\n')
         except:
                     print('\nInvalid input. Please enter an integer from 1 to 3.\n')
     
