@@ -1,5 +1,4 @@
 # Import modules
-from multiprocessing.sharedctypes import Value
 import random
 import string
 
@@ -15,7 +14,6 @@ special_chars = string.punctuation
 
 # Other definitions
 # def 
-
 
 # Main
 def main():
@@ -44,4 +42,4 @@ def main():
                     print("\nInvalid input. Please enter an integer from 1 to 3\n")
 
 
-main()
+main()main()
