@@ -1,14 +1,17 @@
 # Import modules
+
 import sys
 import random
 import string
 
 # Program says hello!
+
 print(
     '\nHello! Welcome to Password Generator!\n'
 )
 
 # Print Colors
+
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -21,26 +24,32 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 # Define characters
+
 lowerLetters = string.ascii_lowercase
 letters = string.ascii_letters
 digits = string.digits
 special_chars = string.punctuation
 
 # Supporting functions
+
+# Information regarding types of passcodes that can be generated
 def complexityHelp():
     print(f'\n{bcolors.OKBLUE}Simple passcode: 5 randomized lowercased letters + 3 digits. Total length: 8 characters.\nComplex passcode: Mix of lowercase letters, uppercase letters, digits, and special characters. Program will ask user for length of passcode.{bcolors.ENDC}')
 
+# Generates pin
 def pinCode():
     temp = random.sample(digits,4)
     pincode = ''.join(temp)
     print(f'{bcolors.OKGREEN}\nPincode: {pincode}\n{bcolors.ENDC}')
     exit()
 
+# Generates a simple password
 def simplePass():
     temp = random.sample(lowerLetters,5)+random.sample(digits,3)
     passCode = ''.join(temp)
     print(f'{bcolors.OKGREEN}\nPasscode: {passCode}\n{bcolors.ENDC}')
 
+# Generates a complex password
 def complexPass(p1):
     complexChars = lowerLetters + letters + digits + special_chars
     temp = random.sample(complexChars, p1)
@@ -60,7 +69,7 @@ def main():
         '2':'Complex Passcode',
         '3':'Help'
     }
-    
+    #Asks users to choose to generate pincode, passcode, or exits the program
     choice = 0
     while not choice in range(1,4):
         try:
@@ -69,15 +78,13 @@ def main():
 
             choice = int(input('\nEnter your choice:'))
 
-            if choice == 3:
-                sys.exit()
-            elif choice >= 4:
-                print('Invalid input. Please enter and integer from 1 to 3.')
+            if choice >= 4:
+                print('\nInvalid input. Please enter and integer from 1 to 3.\n')
+                choice = 0
                 continue
         except:
-                print('Invalid input. Please enter and integer from 1 to 3.')
-
-    
+                print('\nInvalid input. Please enter and integer from 1 to 3.\n')
+    #Uses match/case ternary, generates pin code or passcode depending on input
     match choice:
         case 1:
             pinCode()
@@ -107,8 +114,9 @@ def main():
                 
                             if not passLength in range(9,23):
                                 print("\nInvalid input. Please enter an integer from 8 to 22.\n")
-                            
                         except:
                             print('\nInvalid input. Please enter an integer from 8 to 22.\n')
                     complexPass(passLength)
+        case 3:
+            sys.exit()
 main()
