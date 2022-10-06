@@ -1,4 +1,5 @@
 # Import modules
+import sys
 import random
 import string
 
@@ -25,7 +26,7 @@ letters = string.ascii_letters
 digits = string.digits
 special_chars = string.punctuation
 
-# Other definitions
+# Supporting functions
 def complexityHelp():
     print(f'\n{bcolors.OKBLUE}Simple passcode: 5 randomized lowercased letters + 3 digits. Total length: 8 characters.\nComplex passcode: Mix of lowercase letters, uppercase letters, digits, and special characters. Program will ask user for length of passcode.{bcolors.ENDC}')
 
@@ -36,10 +37,15 @@ def pinCode():
     exit()
 
 def simplePass():
-    passSetup = lowerLetters + digits
     temp = random.sample(lowerLetters,5)+random.sample(digits,3)
     passCode = ''.join(temp)
-    print(f'{bcolors.OKGREEN}\nPincode: {passCode}\n{bcolors.ENDC}')
+    print(f'{bcolors.OKGREEN}\nPasscode: {passCode}\n{bcolors.ENDC}')
+
+def complexPass(p1):
+    complexChars = lowerLetters + letters + digits + special_chars
+    temp = random.sample(complexChars, p1)
+    passCode = ''.join(temp)
+    print(f'{bcolors.OKGREEN}Passcode: {passCode}{bcolors.ENDC}')
 
 # Main function
 def main():
@@ -63,37 +69,46 @@ def main():
 
             choice = int(input('\nEnter your choice:'))
 
-            if choice == 1 or choice == 2:
-                break
             if choice == 3:
-                break
-                exit()
+                sys.exit()
+            elif choice >= 4:
+                print('Invalid input. Please enter and integer from 1 to 3.')
+                continue
         except:
-                    print('\nInvalid input. Please enter an integer from 1 to 3.\n')
-    
-    if choice == 1:
-        pinCode()
-    if choice == 2:
-        complexity_choice = 0
-        while not complexity_choice in range(1,4):
-            try:
-                for key in complexity:
-                    print(f'\n{bcolors.BOLD}{key}:{complexity[key]}{bcolors.ENDC}')
+                print('Invalid input. Please enter and integer from 1 to 3.')
 
-                complexity_choice = int(input('\nEnter your choice:'))
-
-                if complexity_choice >= 1 and complexity_choice < 4 and complexity_choice != 3:
-                    break
-                elif complexity_choice == 3:
-                    complexityHelp()
-                    complexity_choice = 0
-                    continue
-                else:
-                    print('\nInvalid input. Please enter an integer from 1 to 3.\n')
-            except:
-                    print('\nInvalid input. Please enter an integer from 1 to 3.\n')
     
-    match complexity_choice:
+    match choice:
         case 1:
-            simplePass()
+            pinCode()
+        case 2:
+            complexity_choice = 0
+            while not complexity_choice in range(1,4):
+                try:
+                    for key in complexity:
+                        print(f'\n{bcolors.BOLD}{key}:{complexity[key]}{bcolors.ENDC}')
+
+                    complexity_choice = int(input('\nEnter your choice:'))
+
+                    if complexity_choice == 3:
+                        complexityHelp()
+                        complexity_choice = 0
+                        continue
+                except:
+                    print('\nInvalid input. Please enter an integer from 1 to 3.\n')
+            match complexity_choice:
+                case 1:
+                    simplePass()
+                case 2:
+                    passLength = 0
+                    while not passLength in range(9,23):
+                        try:
+                            passLength = int(input('Please choose length of passcode:'))
+                
+                            if not passLength in range(9,23):
+                                print("\nInvalid input. Please enter an integer from 8 to 22.\n")
+                            
+                        except:
+                            print('\nInvalid input. Please enter an integer from 8 to 22.\n')
+                    complexPass(passLength)
 main()
